@@ -4,20 +4,20 @@ window.HV_DATA = {
     "subtitle": "根据《传感器与检测技术》题库、问答和章节资料整理",
     "sourcePdf": "source/question-bank.pdf",
     "sourceLabel": "传感器.pdf / 传感器.docx",
-    "total": 159,
+    "total": 163,
     "counts": {
       "choice": 52,
       "multi": 21,
       "judge": 15,
       "fill": 15,
       "term": 12,
-      "short": 36,
-      "calc": 8
+      "short": 39,
+      "calc": 9
     },
     "choiceExamMinutes": 60,
     "generatedAt": "2026-11-16",
     "note": "第二章计算题、3.7、4.7、5.8 按老师口径不考，已从练习和背题入口移除。",
-    "homeworkCount": 20,
+    "homeworkCount": 24,
     "knowledgeCount": 9,
     "excludedHomework": [
       "2.12",
@@ -91,25 +91,25 @@ window.HV_DATA = {
       "key": "short",
       "label": "简答题",
       "short": "简答",
-      "count": 36,
+      "count": 39,
       "unit": "题",
       "startCount": 6,
-      "allCount": 36,
+      "allCount": 39,
       "desc": "题库问答 + 老师布置的课后简答题。",
       "action": "抽 6 题",
-      "allLabel": "全部 36 题"
+      "allLabel": "全部 39 题"
     },
     {
       "key": "calc",
       "label": "计算题",
       "short": "计算",
-      "count": 8,
+      "count": 9,
       "unit": "题",
       "startCount": 6,
-      "allCount": 8,
+      "allCount": 9,
       "desc": "老师布置的课后计算题（2.12、3.7、5.8 已按“不考”移除）。",
       "action": "抽 6 题",
-      "allLabel": "全部 8 题"
+      "allLabel": "全部 9 题"
     }
   ],
   "groups": [
@@ -3955,6 +3955,54 @@ window.HV_DATA = {
       "review": null,
       "note": "",
       "homework": "9.10"
+    },
+    {
+      "id": "short-37",
+      "type": "short",
+      "number": 37,
+      "group": "第6章 压电式传感器 · 课后习题",
+      "chapter": 6,
+      "prompt": "试分析石英晶体的压电效应机理。",
+      "stem": "试分析石英晶体的压电效应机理。",
+      "answer": "石英晶体（SiO₂）是单晶材料，各向异性，通常用 x、y、z 三个轴描述：\n① z 轴为光轴，沿该方向受力不产生压电效应；\n② x 轴为电轴，压电效应主要在该轴垂直的两个表面产生电荷，且电荷量与切片几何尺寸无关；\n③ y 轴为机械轴，沿该轴受力时产生的电荷量与切片几何尺寸有关。\n\n机理：晶体受外力发生变形，内部正、负电荷中心发生相对位移，使表面出现等量异号电荷（正压电效应）；反之，外加电场使晶体产生机械变形（逆压电效应）。",
+      "keyPoints": [],
+      "explanation": "",
+      "sourceReference": false,
+      "review": null,
+      "note": "记忆：z 光轴不压电，x 电轴出电荷，y 机械轴看尺寸。",
+      "homework": "6.2"
+    },
+    {
+      "id": "short-38",
+      "type": "short",
+      "number": 38,
+      "group": "第6章 压电式传感器 · 课后习题",
+      "chapter": 6,
+      "prompt": "试分析压电式传感器的等效电路。",
+      "stem": "试分析压电式传感器的等效电路。",
+      "answer": "压电元件可等效为两种电路：\n① 电荷源：电荷 q 与压电元件本身电容 Ca 并联；\n② 电压源：电压 U=q/Ca 与电容 Ca 串联。\n\n实际测量时还要考虑电缆电容 Cc、放大器输入电容 Ci 和输入电阻 Ri。\n电压放大器：输入电压 Ui=q/(Ca+Cc+Ci)，电缆电容会影响灵敏度；\n电荷放大器：输出电压 Uo≈−q/Cf，主要取决于反馈电容 Cf，与电缆电容基本无关。",
+      "keyPoints": [],
+      "explanation": "",
+      "sourceReference": false,
+      "review": null,
+      "note": "答题时先画“电荷源并联 Ca”或“电压源串联 Ca”，再补电缆和放大器输入参数。",
+      "homework": "6.6"
+    },
+    {
+      "id": "short-39",
+      "type": "short",
+      "number": 39,
+      "group": "第6章 压电式传感器 · 课后习题",
+      "chapter": 6,
+      "prompt": "试分析压电式加速度传感器的工作原理。",
+      "stem": "试分析压电式加速度传感器的工作原理。",
+      "answer": "传感器基座与被测物体刚性固定。振动时，质量块 m 受到与加速度方向相反的惯性力 F=ma，该交变力作用在压电片上；由压电效应，压电片表面产生交变电荷 Q=d₁₁F=d₁₁ma。\n当振动频率远低于传感器固有频率时，输出电荷与作用力（也就是加速度）成正比，再经电荷放大器转换为电压输出，即可测量加速度。",
+      "keyPoints": [],
+      "explanation": "",
+      "sourceReference": false,
+      "review": null,
+      "note": "关键链：基座随振→质量块惯性力 F=ma→压电片电荷 Q=dF→电荷放大器输出电压。",
+      "homework": "6.10"
     }
   ],
   "questions": [
@@ -7876,6 +7924,70 @@ window.HV_DATA = {
       "review": null,
       "note": "老师只要求 (1)(2)，未把 (3) 光敏二极管响应时间/速度计算列入本次范围。",
       "homework": "9.27"
+    },
+    {
+      "id": "short-37",
+      "type": "short",
+      "number": 37,
+      "group": "第6章 压电式传感器 · 课后习题",
+      "chapter": 6,
+      "prompt": "试分析石英晶体的压电效应机理。",
+      "stem": "试分析石英晶体的压电效应机理。",
+      "answer": "石英晶体（SiO₂）是单晶材料，各向异性，通常用 x、y、z 三个轴描述：\n① z 轴为光轴，沿该方向受力不产生压电效应；\n② x 轴为电轴，压电效应主要在该轴垂直的两个表面产生电荷，且电荷量与切片几何尺寸无关；\n③ y 轴为机械轴，沿该轴受力时产生的电荷量与切片几何尺寸有关。\n\n机理：晶体受外力发生变形，内部正、负电荷中心发生相对位移，使表面出现等量异号电荷（正压电效应）；反之，外加电场使晶体产生机械变形（逆压电效应）。",
+      "keyPoints": [],
+      "explanation": "",
+      "sourceReference": false,
+      "review": null,
+      "note": "记忆：z 光轴不压电，x 电轴出电荷，y 机械轴看尺寸。",
+      "homework": "6.2"
+    },
+    {
+      "id": "short-38",
+      "type": "short",
+      "number": 38,
+      "group": "第6章 压电式传感器 · 课后习题",
+      "chapter": 6,
+      "prompt": "试分析压电式传感器的等效电路。",
+      "stem": "试分析压电式传感器的等效电路。",
+      "answer": "压电元件可等效为两种电路：\n① 电荷源：电荷 q 与压电元件本身电容 Ca 并联；\n② 电压源：电压 U=q/Ca 与电容 Ca 串联。\n\n实际测量时还要考虑电缆电容 Cc、放大器输入电容 Ci 和输入电阻 Ri。\n电压放大器：输入电压 Ui=q/(Ca+Cc+Ci)，电缆电容会影响灵敏度；\n电荷放大器：输出电压 Uo≈−q/Cf，主要取决于反馈电容 Cf，与电缆电容基本无关。",
+      "keyPoints": [],
+      "explanation": "",
+      "sourceReference": false,
+      "review": null,
+      "note": "答题时先画“电荷源并联 Ca”或“电压源串联 Ca”，再补电缆和放大器输入参数。",
+      "homework": "6.6"
+    },
+    {
+      "id": "short-39",
+      "type": "short",
+      "number": 39,
+      "group": "第6章 压电式传感器 · 课后习题",
+      "chapter": 6,
+      "prompt": "试分析压电式加速度传感器的工作原理。",
+      "stem": "试分析压电式加速度传感器的工作原理。",
+      "answer": "传感器基座与被测物体刚性固定。振动时，质量块 m 受到与加速度方向相反的惯性力 F=ma，该交变力作用在压电片上；由压电效应，压电片表面产生交变电荷 Q=d₁₁F=d₁₁ma。\n当振动频率远低于传感器固有频率时，输出电荷与作用力（也就是加速度）成正比，再经电荷放大器转换为电压输出，即可测量加速度。",
+      "keyPoints": [],
+      "explanation": "",
+      "sourceReference": false,
+      "review": null,
+      "note": "关键链：基座随振→质量块惯性力 F=ma→压电片电荷 Q=dF→电荷放大器输出电压。",
+      "homework": "6.10"
+    },
+    {
+      "id": "calc-9",
+      "type": "calc",
+      "number": 9,
+      "group": "第6章 压电式传感器 · 课后习题",
+      "chapter": 6,
+      "prompt": "压电式力传感器与灵敏度 SV 可调的电荷放大器、灵敏度 SX=20 mm/V 的光线示波器连接。已知压力传感器灵敏度 SP=5 pC/Pa，系统总灵敏度 S=0.5 mm/Pa。求：(1) 电荷放大器灵敏度 SV（V/pC）；(2) 测 40 Pa 压力变化时光点移动距离。",
+      "stem": "压电式力传感器与灵敏度 SV 可调的电荷放大器、灵敏度 SX=20 mm/V 的光线示波器连接。已知压力传感器灵敏度 SP=5 pC/Pa，系统总灵敏度 S=0.5 mm/Pa。求：(1) 电荷放大器灵敏度 SV（V/pC）；(2) 测 40 Pa 压力变化时光点移动距离。",
+      "answer": "系统总灵敏度：S=SP·SV·SX。\n\n(1) SV=S/(SP·SX)=0.5/(5×20)=0.005 V/pC=5 mV/pC。\n\n(2) 光点移动距离：x=S·Δp=0.5×40=20 mm。",
+      "keyPoints": [],
+      "explanation": "",
+      "sourceReference": false,
+      "review": null,
+      "note": "单位链：(pC/Pa)×(V/pC)×(mm/V)=mm/Pa；最后一步直接用总灵敏度乘压力变化。",
+      "homework": "6.11"
     }
   ],
   "issues": [
@@ -8061,6 +8173,22 @@ window.HV_DATA = {
       "review": null,
       "note": "老师只要求 (1)(2)，未把 (3) 光敏二极管响应时间/速度计算列入本次范围。",
       "homework": "9.27"
+    },
+    {
+      "id": "calc-9",
+      "type": "calc",
+      "number": 9,
+      "group": "第6章 压电式传感器 · 课后习题",
+      "chapter": 6,
+      "prompt": "压电式力传感器与灵敏度 SV 可调的电荷放大器、灵敏度 SX=20 mm/V 的光线示波器连接。已知压力传感器灵敏度 SP=5 pC/Pa，系统总灵敏度 S=0.5 mm/Pa。求：(1) 电荷放大器灵敏度 SV（V/pC）；(2) 测 40 Pa 压力变化时光点移动距离。",
+      "stem": "压电式力传感器与灵敏度 SV 可调的电荷放大器、灵敏度 SX=20 mm/V 的光线示波器连接。已知压力传感器灵敏度 SP=5 pC/Pa，系统总灵敏度 S=0.5 mm/Pa。求：(1) 电荷放大器灵敏度 SV（V/pC）；(2) 测 40 Pa 压力变化时光点移动距离。",
+      "answer": "系统总灵敏度：S=SP·SV·SX。\n\n(1) SV=S/(SP·SX)=0.5/(5×20)=0.005 V/pC=5 mV/pC。\n\n(2) 光点移动距离：x=S·Δp=0.5×40=20 mm。",
+      "keyPoints": [],
+      "explanation": "",
+      "sourceReference": false,
+      "review": null,
+      "note": "单位链：(pC/Pa)×(V/pC)×(mm/V)=mm/Pa；最后一步直接用总灵敏度乘压力变化。",
+      "homework": "6.11"
     }
   ],
   "homework": [
@@ -8076,6 +8204,9 @@ window.HV_DATA = {
     "short-34",
     "short-35",
     "short-36",
+    "short-37",
+    "short-38",
+    "short-39",
     "calc-1",
     "calc-2",
     "calc-3",
@@ -8083,7 +8214,8 @@ window.HV_DATA = {
     "calc-5",
     "calc-6",
     "calc-7",
-    "calc-8"
+    "calc-8",
+    "calc-9"
   ],
   "knowledge": [
     {
@@ -8181,7 +8313,12 @@ window.HV_DATA = {
         "等效电路：压电元件可等效为电荷源并联电容，或电压源串联电容。",
         "测量电路：电压放大器（输入阻抗要高）和电荷放大器（输出与电缆电容基本无关）；串接/并接改变输出电荷、电压和电容。"
       ],
-      "homework": []
+      "homework": [
+        "6.2",
+        "6.6",
+        "6.10",
+        "6.11"
+      ]
     },
     {
       "id": "scope-ch7",
