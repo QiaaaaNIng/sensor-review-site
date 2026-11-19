@@ -778,6 +778,14 @@
           </div>
         </div>
 
+        <div class="exam-tip">
+          <div class="eyebrow">EXAM STRATEGY</div>
+          <strong>不会写的也要写满</strong>
+          <p>
+            计算题：先把公式、已知量、代入式和单位写出来，算不下去也别空着；简答题：先写定义，再分点写原理/条件/结论，能写几点写几点；判断题/选择题不要留空。写满不一定全对，但空题一定没分。
+          </p>
+        </div>
+
         <div class="knowledge-grid">${cards}</div>
 
         <p class="scope-bottom-note">
