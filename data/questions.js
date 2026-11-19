@@ -4,21 +4,27 @@ window.HV_DATA = {
     "subtitle": "根据《传感器与检测技术》题库、问答和章节资料整理",
     "sourcePdf": "source/question-bank.pdf",
     "sourceLabel": "传感器.pdf / 传感器.docx",
-    "total": 163,
+    "total": 159,
     "counts": {
       "choice": 52,
       "multi": 21,
       "judge": 15,
       "fill": 15,
       "term": 12,
-      "short": 37,
-      "calc": 11
+      "short": 36,
+      "calc": 8
     },
     "choiceExamMinutes": 60,
     "generatedAt": "2026-11-16",
-    "note": "单选/多选/简答来自题库；判断/填空/名词为据题库要点整理的速记题。",
-    "homeworkCount": 24,
-    "knowledgeCount": 9
+    "note": "第二章计算题、3.7、4.7、5.8 按老师口径不考，已从练习和背题入口移除。",
+    "homeworkCount": 20,
+    "knowledgeCount": 9,
+    "excludedHomework": [
+      "2.12",
+      "3.7",
+      "4.7",
+      "5.8"
+    ]
   },
   "types": [
     {
@@ -85,25 +91,25 @@ window.HV_DATA = {
       "key": "short",
       "label": "简答题",
       "short": "简答",
-      "count": 37,
+      "count": 36,
       "unit": "题",
       "startCount": 6,
-      "allCount": 37,
+      "allCount": 36,
       "desc": "题库问答 + 老师布置的课后简答题。",
       "action": "抽 6 题",
-      "allLabel": "全部 37 题"
+      "allLabel": "全部 36 题"
     },
     {
       "key": "calc",
       "label": "计算题",
       "short": "计算",
-      "count": 11,
+      "count": 8,
       "unit": "题",
       "startCount": 6,
-      "allCount": 11,
-      "desc": "老师布置的课后计算题；先写公式，再对步骤。",
+      "allCount": 8,
+      "desc": "老师布置的课后计算题（2.12、3.7、5.8 已按“不考”移除）。",
       "action": "抽 6 题",
-      "allLabel": "全部 11 题"
+      "allLabel": "全部 8 题"
     }
   ],
   "groups": [
@@ -3826,22 +3832,6 @@ window.HV_DATA = {
       "id": "short-29",
       "type": "short",
       "number": 29,
-      "group": "第4章 电感式传感器 · 课后习题",
-      "chapter": 4,
-      "prompt": "引起零点残余电压的原因是什么？如何消除零点残余电压？",
-      "stem": "引起零点残余电压的原因是什么？如何消除零点残余电压？",
-      "answer": "原因：\n①差动变压器两次级绕组的电气参数和几何尺寸不对称；\n②磁性材料的磁化曲线非线性；\n③激励电压中含有谐波、线圈分布电容等因素。\n\n消除方法：\n①保证两次级绕组和磁路对称，提高制造、装配精度；\n②采用补偿绕组或补偿电阻进行零点调整；\n③采用相敏检波电路，必要时加屏蔽和滤波。",
-      "keyPoints": [],
-      "explanation": "",
-      "sourceReference": false,
-      "review": null,
-      "note": "注意：习题答案 PDF 在 4.7 处误贴了“差动整流电路”的内容，这里按题干中的零点残余电压作答。",
-      "homework": "4.7"
-    },
-    {
-      "id": "short-30",
-      "type": "short",
-      "number": 30,
       "group": "第5章 电容式传感器 · 课后习题",
       "chapter": 5,
       "prompt": "试分析电容式厚度传感器的工作原理。",
@@ -3855,9 +3845,9 @@ window.HV_DATA = {
       "homework": "5.5"
     },
     {
-      "id": "short-31",
+      "id": "short-30",
       "type": "short",
-      "number": 31,
+      "number": 30,
       "group": "第7章 磁电式传感器 · 课后习题",
       "chapter": 7,
       "prompt": "简述变磁通式和恒磁通式磁电感应式传感器的工作原理。",
@@ -3871,9 +3861,9 @@ window.HV_DATA = {
       "homework": "7.1"
     },
     {
-      "id": "short-32",
+      "id": "short-31",
       "type": "short",
-      "number": 32,
+      "number": 31,
       "group": "第7章 磁电式传感器 · 课后习题",
       "chapter": 7,
       "prompt": "影响霍尔元件输出零点的因素有哪些？如何补偿？",
@@ -3887,9 +3877,9 @@ window.HV_DATA = {
       "homework": "7.4"
     },
     {
-      "id": "short-33",
+      "id": "short-32",
       "type": "short",
-      "number": 33,
+      "number": 32,
       "group": "第8章 热电式传感器 · 课后习题",
       "chapter": 8,
       "prompt": "什么是热电效应、接触电动势、温差电动势？",
@@ -3903,9 +3893,9 @@ window.HV_DATA = {
       "homework": "8.1"
     },
     {
-      "id": "short-34",
+      "id": "short-33",
       "type": "short",
-      "number": 34,
+      "number": 33,
       "group": "第8章 热电式传感器 · 课后习题",
       "chapter": 8,
       "prompt": "什么是中间导体定律、中间温度定律、标准电极定律、均质导体定律？",
@@ -3919,9 +3909,9 @@ window.HV_DATA = {
       "homework": "8.3"
     },
     {
-      "id": "short-35",
+      "id": "short-34",
       "type": "short",
-      "number": 35,
+      "number": 34,
       "group": "第9章 光电式传感器 · 课后习题",
       "chapter": 9,
       "prompt": "什么是光电式传感器？光电式传感器的基本工作原理是什么？",
@@ -3935,9 +3925,9 @@ window.HV_DATA = {
       "homework": "9.1"
     },
     {
-      "id": "short-36",
+      "id": "short-35",
       "type": "short",
-      "number": 36,
+      "number": 35,
       "group": "第9章 光电式传感器 · 课后习题",
       "chapter": 9,
       "prompt": "简述光电倍增管的工作原理。光电倍增管的主要参数有哪些？",
@@ -3951,9 +3941,9 @@ window.HV_DATA = {
       "homework": "9.7"
     },
     {
-      "id": "short-37",
+      "id": "short-36",
       "type": "short",
-      "number": 37,
+      "number": 36,
       "group": "第9章 光电式传感器 · 课后习题",
       "chapter": 9,
       "prompt": "试解释光敏管的工作原理。介绍光敏二极管和光敏三极管的主要特性。",
@@ -7635,22 +7625,6 @@ window.HV_DATA = {
       "id": "short-29",
       "type": "short",
       "number": 29,
-      "group": "第4章 电感式传感器 · 课后习题",
-      "chapter": 4,
-      "prompt": "引起零点残余电压的原因是什么？如何消除零点残余电压？",
-      "stem": "引起零点残余电压的原因是什么？如何消除零点残余电压？",
-      "answer": "原因：\n①差动变压器两次级绕组的电气参数和几何尺寸不对称；\n②磁性材料的磁化曲线非线性；\n③激励电压中含有谐波、线圈分布电容等因素。\n\n消除方法：\n①保证两次级绕组和磁路对称，提高制造、装配精度；\n②采用补偿绕组或补偿电阻进行零点调整；\n③采用相敏检波电路，必要时加屏蔽和滤波。",
-      "keyPoints": [],
-      "explanation": "",
-      "sourceReference": false,
-      "review": null,
-      "note": "注意：习题答案 PDF 在 4.7 处误贴了“差动整流电路”的内容，这里按题干中的零点残余电压作答。",
-      "homework": "4.7"
-    },
-    {
-      "id": "short-30",
-      "type": "short",
-      "number": 30,
       "group": "第5章 电容式传感器 · 课后习题",
       "chapter": 5,
       "prompt": "试分析电容式厚度传感器的工作原理。",
@@ -7664,9 +7638,9 @@ window.HV_DATA = {
       "homework": "5.5"
     },
     {
-      "id": "short-31",
+      "id": "short-30",
       "type": "short",
-      "number": 31,
+      "number": 30,
       "group": "第7章 磁电式传感器 · 课后习题",
       "chapter": 7,
       "prompt": "简述变磁通式和恒磁通式磁电感应式传感器的工作原理。",
@@ -7680,9 +7654,9 @@ window.HV_DATA = {
       "homework": "7.1"
     },
     {
-      "id": "short-32",
+      "id": "short-31",
       "type": "short",
-      "number": 32,
+      "number": 31,
       "group": "第7章 磁电式传感器 · 课后习题",
       "chapter": 7,
       "prompt": "影响霍尔元件输出零点的因素有哪些？如何补偿？",
@@ -7696,9 +7670,9 @@ window.HV_DATA = {
       "homework": "7.4"
     },
     {
-      "id": "short-33",
+      "id": "short-32",
       "type": "short",
-      "number": 33,
+      "number": 32,
       "group": "第8章 热电式传感器 · 课后习题",
       "chapter": 8,
       "prompt": "什么是热电效应、接触电动势、温差电动势？",
@@ -7712,9 +7686,9 @@ window.HV_DATA = {
       "homework": "8.1"
     },
     {
-      "id": "short-34",
+      "id": "short-33",
       "type": "short",
-      "number": 34,
+      "number": 33,
       "group": "第8章 热电式传感器 · 课后习题",
       "chapter": 8,
       "prompt": "什么是中间导体定律、中间温度定律、标准电极定律、均质导体定律？",
@@ -7728,9 +7702,9 @@ window.HV_DATA = {
       "homework": "8.3"
     },
     {
-      "id": "short-35",
+      "id": "short-34",
       "type": "short",
-      "number": 35,
+      "number": 34,
       "group": "第9章 光电式传感器 · 课后习题",
       "chapter": 9,
       "prompt": "什么是光电式传感器？光电式传感器的基本工作原理是什么？",
@@ -7744,9 +7718,9 @@ window.HV_DATA = {
       "homework": "9.1"
     },
     {
-      "id": "short-36",
+      "id": "short-35",
       "type": "short",
-      "number": 36,
+      "number": 35,
       "group": "第9章 光电式传感器 · 课后习题",
       "chapter": 9,
       "prompt": "简述光电倍增管的工作原理。光电倍增管的主要参数有哪些？",
@@ -7760,9 +7734,9 @@ window.HV_DATA = {
       "homework": "9.7"
     },
     {
-      "id": "short-37",
+      "id": "short-36",
       "type": "short",
-      "number": 37,
+      "number": 36,
       "group": "第9章 光电式传感器 · 课后习题",
       "chapter": 9,
       "prompt": "试解释光敏管的工作原理。介绍光敏二极管和光敏三极管的主要特性。",
@@ -7779,38 +7753,6 @@ window.HV_DATA = {
       "id": "calc-1",
       "type": "calc",
       "number": 1,
-      "group": "第2章 传感器基本特性 · 课后习题",
-      "chapter": 2,
-      "prompt": "设一力传感器可简化为典型的质量—弹簧—阻尼二阶系统，固有频率 f0=1000 Hz，阻尼比 ξ=0.7。用它测量 600 Hz 和 400 Hz 的正弦交变力，求输出与输入的幅值比 A(ω) 和相位差 φ(ω)。",
-      "stem": "设一力传感器可简化为典型的质量—弹簧—阻尼二阶系统，固有频率 f0=1000 Hz，阻尼比 ξ=0.7。用它测量 600 Hz 和 400 Hz 的正弦交变力，求输出与输入的幅值比 A(ω) 和相位差 φ(ω)。",
-      "answer": "二阶系统：A(ω)=1/√[(1-r²)²+(2ξr)²]，φ(ω)=-arctan[2ξr/(1-r²)]，r=f/f0。\n\n① f=600 Hz，r=0.6：\nA=1/√[(1-0.36)²+(2×0.7×0.6)²]\n =1/√(0.4096+0.7056)≈0.947。\nφ=-arctan(0.84/0.64)≈-52.7°。\n\n② f=400 Hz，r=0.4：\nA=1/√[(1-0.16)²+(2×0.7×0.4)²]\n =1/√(0.7056+0.3136)≈0.990。\nφ=-arctan(0.56/0.84)≈-33.7°。",
-      "keyPoints": [],
-      "explanation": "",
-      "sourceReference": false,
-      "review": null,
-      "note": "",
-      "homework": "2.12"
-    },
-    {
-      "id": "calc-2",
-      "type": "calc",
-      "number": 2,
-      "group": "第3章 电阻式传感器 · 课后习题",
-      "chapter": 3,
-      "prompt": "图 3.5 中，负载开路，E=4 V，R1=R2=R3=R4=100 Ω。求：(1) R1 为金属应变片，ΔR1=1.0 Ω 时 U0；(2) R1、R2 均为应变片且同批号、应变极性和大小相同，其余为外接电阻时 U0；(3) R1、R2 均为应变片，ΔR1=ΔR2=1.0 Ω 但极性相反时 U0。",
-      "stem": "图 3.5 中，负载开路，E=4 V，R1=R2=R3=R4=100 Ω。求：(1) R1 为金属应变片，ΔR1=1.0 Ω 时 U0；(2) R1、R2 均为应变片且同批号、应变极性和大小相同，其余为外接电阻时 U0；(3) R1、R2 均为应变片，ΔR1=ΔR2=1.0 Ω 但极性相反时 U0。",
-      "answer": "① 单臂：\nU0≈E/4·ΔR/R=4/4×1/100=0.01 V=10 mV（精确值约 9.95 mV）。\n\n② R1、R2 相邻桥臂且应变相同：\n两臂电阻变化相同，电桥仍平衡，U0=0。\n\n③ R1、R2 应变大小相同、极性相反：\nU0≈E/2·ΔR/R=4/2×1/100=0.02 V=20 mV。\n符号取决于受拉/受压方向；一拉一压时输出约 ±20 mV。",
-      "keyPoints": [],
-      "explanation": "",
-      "sourceReference": false,
-      "review": null,
-      "note": "",
-      "homework": "3.7"
-    },
-    {
-      "id": "calc-3",
-      "type": "calc",
-      "number": 3,
       "group": "第4章 电感式传感器 · 课后习题",
       "chapter": 4,
       "prompt": "变气隙厚度电感传感器：铁芯截面积 A0=1.5 cm²，磁路长度 l=20 cm，相对磁导率 μr=5000，气隙 δ0=0.5 cm，Δδ=±0.1 mm，μ0=4π×10⁻⁷ H/m，N=3000。求单线圈式灵敏度 ΔL/Δδ；做成差动结构后灵敏度如何变化？",
@@ -7824,9 +7766,9 @@ window.HV_DATA = {
       "homework": "4.3"
     },
     {
-      "id": "calc-4",
+      "id": "calc-2",
       "type": "calc",
-      "number": 4,
+      "number": 2,
       "group": "第4章 电感式传感器 · 课后习题",
       "chapter": 4,
       "prompt": "差动电感位移传感器：U=4 V，f=400 Hz，线圈 R=40 Ω、L=30 mH，用两只匹配电阻组成四臂等阻抗电桥。求：(1) 匹配电阻 R3、R4 使电压灵敏度最大；(2) ΔZ=10 Ω 时，单臂和差动电桥的输出电压。",
@@ -7840,9 +7782,9 @@ window.HV_DATA = {
       "homework": "4.5"
     },
     {
-      "id": "calc-5",
+      "id": "calc-3",
       "type": "calc",
-      "number": 5,
+      "number": 3,
       "group": "第5章 电容式传感器 · 课后习题",
       "chapter": 5,
       "prompt": "平板电容式传感器：a=10 mm，b=16 mm，极板间距 d0=1 mm；一块极板向左平移 Δx=2 mm。求电容变化量 ΔC、相对变化量 ΔC/C0 和位移灵敏度 K。ε0=8.854×10⁻¹² F/m，εr=1。",
@@ -7856,25 +7798,9 @@ window.HV_DATA = {
       "homework": "5.2"
     },
     {
-      "id": "calc-6",
+      "id": "calc-4",
       "type": "calc",
-      "number": 6,
-      "group": "第5章 电容式传感器 · 课后习题",
-      "chapter": 5,
-      "prompt": "电容测微仪圆形极板半径 r=4 mm，初始间隙 d0=0.3 mm，间隙变化 Δd=2 μm。求：(1) 电容变化量；(2) 测量电路灵敏度 S1=100 mV/pF、仪表灵敏度 S2=5 格/mV 时，读数变化多少格？",
-      "stem": "电容测微仪圆形极板半径 r=4 mm，初始间隙 d0=0.3 mm，间隙变化 Δd=2 μm。求：(1) 电容变化量；(2) 测量电路灵敏度 S1=100 mV/pF、仪表灵敏度 S2=5 格/mV 时，读数变化多少格？",
-      "answer": "C0=ε0πr²/d0\n =8.854×10⁻¹²×3.14×(4×10⁻³)²/0.3×10⁻³\n ≈1.483 pF。\n\nΔC≈C0·Δd/d0\n =1.483×2×10⁻⁶/0.3×10⁻³\n ≈9.88×10⁻³ pF。\n\n读数变化：\nΔN=ΔC·S1·S2\n =9.88×10⁻³×100×5≈4.94 格≈5 格。",
-      "keyPoints": [],
-      "explanation": "",
-      "sourceReference": false,
-      "review": null,
-      "note": "",
-      "homework": "5.8"
-    },
-    {
-      "id": "calc-7",
-      "type": "calc",
-      "number": 7,
+      "number": 4,
       "group": "第7章 磁电式传感器 · 课后习题",
       "chapter": 7,
       "prompt": "霍尔元件尺寸 l×b×d=1.0 mm×3.5 mm×0.1 mm，沿 l 方向通电流 I=1.0 mA，垂直 lb 面加 B=0.3 T，霍尔灵敏度 KH=22 V/(A·T)。求霍尔电动势和载流子浓度。",
@@ -7888,9 +7814,9 @@ window.HV_DATA = {
       "homework": "7.6"
     },
     {
-      "id": "calc-8",
+      "id": "calc-5",
       "type": "calc",
-      "number": 8,
+      "number": 5,
       "group": "第8章 热电式传感器 · 课后习题",
       "chapter": 8,
       "prompt": "用两只 K 型热电偶测两点温差，t1=420℃，参考端 t0=30℃，测得温差电势 15.24 mV。求两点温差。若测 t1 的热电偶错用 E 型，其他正确，实际温差是多少？",
@@ -7904,9 +7830,9 @@ window.HV_DATA = {
       "homework": "8.7"
     },
     {
-      "id": "calc-9",
+      "id": "calc-6",
       "type": "calc",
-      "number": 9,
+      "number": 6,
       "group": "第8章 热电式传感器 · 课后习题",
       "chapter": 8,
       "prompt": "使用 K 型热电偶，参考端 0℃ 时，热端 30℃ 和 900℃ 的温差电动势分别为 1.203 mV 和 37.326 mV。当参考端为 30℃、测量点 900℃ 时，温差电动势是多少？",
@@ -7920,9 +7846,9 @@ window.HV_DATA = {
       "homework": "8.12"
     },
     {
-      "id": "calc-10",
+      "id": "calc-7",
       "type": "calc",
-      "number": 10,
+      "number": 7,
       "group": "第9章 光电式传感器 · 课后习题",
       "chapter": 9,
       "prompt": "某循环码盘电刷初始位置为“0000”，测得结果为“0110”，求实际转过的角度；若码盘半径 1 cm，求边缘位移量。",
@@ -7936,9 +7862,9 @@ window.HV_DATA = {
       "homework": "9.23"
     },
     {
-      "id": "calc-11",
+      "id": "calc-8",
       "type": "calc",
-      "number": 11,
+      "number": 8,
       "group": "第9章 光电式传感器 · 课后习题",
       "chapter": 9,
       "prompt": "计量光栅栅线密度 100 线/mm，栅线夹角 θ=0.1°。求：(1) 莫尔条纹间距 BH；(2) 指示光栅上莫尔条纹移动 15 条时，被测线位移。",
@@ -8012,38 +7938,6 @@ window.HV_DATA = {
       "id": "calc-1",
       "type": "calc",
       "number": 1,
-      "group": "第2章 传感器基本特性 · 课后习题",
-      "chapter": 2,
-      "prompt": "设一力传感器可简化为典型的质量—弹簧—阻尼二阶系统，固有频率 f0=1000 Hz，阻尼比 ξ=0.7。用它测量 600 Hz 和 400 Hz 的正弦交变力，求输出与输入的幅值比 A(ω) 和相位差 φ(ω)。",
-      "stem": "设一力传感器可简化为典型的质量—弹簧—阻尼二阶系统，固有频率 f0=1000 Hz，阻尼比 ξ=0.7。用它测量 600 Hz 和 400 Hz 的正弦交变力，求输出与输入的幅值比 A(ω) 和相位差 φ(ω)。",
-      "answer": "二阶系统：A(ω)=1/√[(1-r²)²+(2ξr)²]，φ(ω)=-arctan[2ξr/(1-r²)]，r=f/f0。\n\n① f=600 Hz，r=0.6：\nA=1/√[(1-0.36)²+(2×0.7×0.6)²]\n =1/√(0.4096+0.7056)≈0.947。\nφ=-arctan(0.84/0.64)≈-52.7°。\n\n② f=400 Hz，r=0.4：\nA=1/√[(1-0.16)²+(2×0.7×0.4)²]\n =1/√(0.7056+0.3136)≈0.990。\nφ=-arctan(0.56/0.84)≈-33.7°。",
-      "keyPoints": [],
-      "explanation": "",
-      "sourceReference": false,
-      "review": null,
-      "note": "",
-      "homework": "2.12"
-    },
-    {
-      "id": "calc-2",
-      "type": "calc",
-      "number": 2,
-      "group": "第3章 电阻式传感器 · 课后习题",
-      "chapter": 3,
-      "prompt": "图 3.5 中，负载开路，E=4 V，R1=R2=R3=R4=100 Ω。求：(1) R1 为金属应变片，ΔR1=1.0 Ω 时 U0；(2) R1、R2 均为应变片且同批号、应变极性和大小相同，其余为外接电阻时 U0；(3) R1、R2 均为应变片，ΔR1=ΔR2=1.0 Ω 但极性相反时 U0。",
-      "stem": "图 3.5 中，负载开路，E=4 V，R1=R2=R3=R4=100 Ω。求：(1) R1 为金属应变片，ΔR1=1.0 Ω 时 U0；(2) R1、R2 均为应变片且同批号、应变极性和大小相同，其余为外接电阻时 U0；(3) R1、R2 均为应变片，ΔR1=ΔR2=1.0 Ω 但极性相反时 U0。",
-      "answer": "① 单臂：\nU0≈E/4·ΔR/R=4/4×1/100=0.01 V=10 mV（精确值约 9.95 mV）。\n\n② R1、R2 相邻桥臂且应变相同：\n两臂电阻变化相同，电桥仍平衡，U0=0。\n\n③ R1、R2 应变大小相同、极性相反：\nU0≈E/2·ΔR/R=4/2×1/100=0.02 V=20 mV。\n符号取决于受拉/受压方向；一拉一压时输出约 ±20 mV。",
-      "keyPoints": [],
-      "explanation": "",
-      "sourceReference": false,
-      "review": null,
-      "note": "",
-      "homework": "3.7"
-    },
-    {
-      "id": "calc-3",
-      "type": "calc",
-      "number": 3,
       "group": "第4章 电感式传感器 · 课后习题",
       "chapter": 4,
       "prompt": "变气隙厚度电感传感器：铁芯截面积 A0=1.5 cm²，磁路长度 l=20 cm，相对磁导率 μr=5000，气隙 δ0=0.5 cm，Δδ=±0.1 mm，μ0=4π×10⁻⁷ H/m，N=3000。求单线圈式灵敏度 ΔL/Δδ；做成差动结构后灵敏度如何变化？",
@@ -8057,9 +7951,9 @@ window.HV_DATA = {
       "homework": "4.3"
     },
     {
-      "id": "calc-4",
+      "id": "calc-2",
       "type": "calc",
-      "number": 4,
+      "number": 2,
       "group": "第4章 电感式传感器 · 课后习题",
       "chapter": 4,
       "prompt": "差动电感位移传感器：U=4 V，f=400 Hz，线圈 R=40 Ω、L=30 mH，用两只匹配电阻组成四臂等阻抗电桥。求：(1) 匹配电阻 R3、R4 使电压灵敏度最大；(2) ΔZ=10 Ω 时，单臂和差动电桥的输出电压。",
@@ -8073,9 +7967,9 @@ window.HV_DATA = {
       "homework": "4.5"
     },
     {
-      "id": "calc-5",
+      "id": "calc-3",
       "type": "calc",
-      "number": 5,
+      "number": 3,
       "group": "第5章 电容式传感器 · 课后习题",
       "chapter": 5,
       "prompt": "平板电容式传感器：a=10 mm，b=16 mm，极板间距 d0=1 mm；一块极板向左平移 Δx=2 mm。求电容变化量 ΔC、相对变化量 ΔC/C0 和位移灵敏度 K。ε0=8.854×10⁻¹² F/m，εr=1。",
@@ -8089,25 +7983,9 @@ window.HV_DATA = {
       "homework": "5.2"
     },
     {
-      "id": "calc-6",
+      "id": "calc-4",
       "type": "calc",
-      "number": 6,
-      "group": "第5章 电容式传感器 · 课后习题",
-      "chapter": 5,
-      "prompt": "电容测微仪圆形极板半径 r=4 mm，初始间隙 d0=0.3 mm，间隙变化 Δd=2 μm。求：(1) 电容变化量；(2) 测量电路灵敏度 S1=100 mV/pF、仪表灵敏度 S2=5 格/mV 时，读数变化多少格？",
-      "stem": "电容测微仪圆形极板半径 r=4 mm，初始间隙 d0=0.3 mm，间隙变化 Δd=2 μm。求：(1) 电容变化量；(2) 测量电路灵敏度 S1=100 mV/pF、仪表灵敏度 S2=5 格/mV 时，读数变化多少格？",
-      "answer": "C0=ε0πr²/d0\n =8.854×10⁻¹²×3.14×(4×10⁻³)²/0.3×10⁻³\n ≈1.483 pF。\n\nΔC≈C0·Δd/d0\n =1.483×2×10⁻⁶/0.3×10⁻³\n ≈9.88×10⁻³ pF。\n\n读数变化：\nΔN=ΔC·S1·S2\n =9.88×10⁻³×100×5≈4.94 格≈5 格。",
-      "keyPoints": [],
-      "explanation": "",
-      "sourceReference": false,
-      "review": null,
-      "note": "",
-      "homework": "5.8"
-    },
-    {
-      "id": "calc-7",
-      "type": "calc",
-      "number": 7,
+      "number": 4,
       "group": "第7章 磁电式传感器 · 课后习题",
       "chapter": 7,
       "prompt": "霍尔元件尺寸 l×b×d=1.0 mm×3.5 mm×0.1 mm，沿 l 方向通电流 I=1.0 mA，垂直 lb 面加 B=0.3 T，霍尔灵敏度 KH=22 V/(A·T)。求霍尔电动势和载流子浓度。",
@@ -8121,9 +7999,9 @@ window.HV_DATA = {
       "homework": "7.6"
     },
     {
-      "id": "calc-8",
+      "id": "calc-5",
       "type": "calc",
-      "number": 8,
+      "number": 5,
       "group": "第8章 热电式传感器 · 课后习题",
       "chapter": 8,
       "prompt": "用两只 K 型热电偶测两点温差，t1=420℃，参考端 t0=30℃，测得温差电势 15.24 mV。求两点温差。若测 t1 的热电偶错用 E 型，其他正确，实际温差是多少？",
@@ -8137,9 +8015,9 @@ window.HV_DATA = {
       "homework": "8.7"
     },
     {
-      "id": "calc-9",
+      "id": "calc-6",
       "type": "calc",
-      "number": 9,
+      "number": 6,
       "group": "第8章 热电式传感器 · 课后习题",
       "chapter": 8,
       "prompt": "使用 K 型热电偶，参考端 0℃ 时，热端 30℃ 和 900℃ 的温差电动势分别为 1.203 mV 和 37.326 mV。当参考端为 30℃、测量点 900℃ 时，温差电动势是多少？",
@@ -8153,9 +8031,9 @@ window.HV_DATA = {
       "homework": "8.12"
     },
     {
-      "id": "calc-10",
+      "id": "calc-7",
       "type": "calc",
-      "number": 10,
+      "number": 7,
       "group": "第9章 光电式传感器 · 课后习题",
       "chapter": 9,
       "prompt": "某循环码盘电刷初始位置为“0000”，测得结果为“0110”，求实际转过的角度；若码盘半径 1 cm，求边缘位移量。",
@@ -8169,9 +8047,9 @@ window.HV_DATA = {
       "homework": "9.23"
     },
     {
-      "id": "calc-11",
+      "id": "calc-8",
       "type": "calc",
-      "number": 11,
+      "number": 8,
       "group": "第9章 光电式传感器 · 课后习题",
       "chapter": 9,
       "prompt": "计量光栅栅线密度 100 线/mm，栅线夹角 θ=0.1°。求：(1) 莫尔条纹间距 BH；(2) 指示光栅上莫尔条纹移动 15 条时，被测线位移。",
@@ -8198,7 +8076,6 @@ window.HV_DATA = {
     "short-34",
     "short-35",
     "short-36",
-    "short-37",
     "calc-1",
     "calc-2",
     "calc-3",
@@ -8206,10 +8083,7 @@ window.HV_DATA = {
     "calc-5",
     "calc-6",
     "calc-7",
-    "calc-8",
-    "calc-9",
-    "calc-10",
-    "calc-11"
+    "calc-8"
   ],
   "knowledge": [
     {
@@ -8242,8 +8116,7 @@ window.HV_DATA = {
         "一阶系统看时间常数 τ；二阶系统看固有频率 ωn 和阻尼比 ξ，计算幅值比与相位差。"
       ],
       "homework": [
-        "2.5",
-        "2.12"
+        "2.5"
       ]
     },
     {
@@ -8259,8 +8132,7 @@ window.HV_DATA = {
         "温度补偿：电桥补偿法（补偿片）和应变片自补偿法。"
       ],
       "homework": [
-        "3.3",
-        "3.7"
+        "3.3"
       ]
     },
     {
@@ -8277,8 +8149,7 @@ window.HV_DATA = {
       ],
       "homework": [
         "4.3",
-        "4.5",
-        "4.7"
+        "4.5"
       ]
     },
     {
@@ -8295,8 +8166,7 @@ window.HV_DATA = {
       ],
       "homework": [
         "5.2",
-        "5.5",
-        "5.8"
+        "5.5"
       ]
     },
     {
