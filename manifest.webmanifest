@@ -1,0 +1,27 @@
+{
+  "name": "传感器刷题室 · 传感器与检测技术",
+  "short_name": "传感器刷题",
+  "description": "传感器与检测技术全题型复习：选择、多选、判断、填空、名词、简答、计算与课后习题。",
+  "lang": "zh-CN",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3eee3",
+  "theme_color": "#18231f",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"]
+}
