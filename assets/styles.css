@@ -3637,6 +3637,30 @@ button:disabled {
   border-color: rgba(247, 241, 228, .55);
 }
 
+.exam-tip {
+  margin-top: 12px;
+  padding: 14px 18px;
+  background: rgba(255, 253, 247, .78);
+  border: 1px dashed var(--line-strong);
+  border-left: 3px solid var(--gold);
+  border-radius: 11px;
+}
+
+.exam-tip strong {
+  display: block;
+  margin: 2px 0 4px;
+  font-family: var(--serif);
+  font-size: clamp(18px, 2vw, 24px);
+}
+
+.exam-tip p {
+  max-width: 950px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.9;
+}
+
 .knowledge-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -5251,6 +5275,15 @@ button:disabled {
 
   .scope-hero-actions .btn {
     min-height: 42px;
+  }
+
+  .exam-tip {
+    padding: 13px 14px;
+  }
+
+  .exam-tip p {
+    font-size: 12px;
+    line-height: 1.85;
   }
 
   .knowledge-card {
