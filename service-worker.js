@@ -1,4 +1,4 @@
-const CACHE = "sensor-quiz-v1-2026-11-19";
+const CACHE = "sensor-quiz-v2-2026-11-19";
 const ASSETS = [
   "./",
   "./index.html",
