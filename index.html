@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3eee3">
+  <meta name="description" content="传感器与检测技术本地复习网站：单选、多选、判断、填空、名词解释、简答、计算题，含老师范围、课后习题、背题模式、复习本与学习数据。">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="传感器刷题">
+  <title>传感器刷题室 · 传感器与检测技术</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#view">跳到主要内容</a>
+
+  <div class="page-texture" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#" data-nav="home" aria-label="传感器刷题室首页">
+      <span class="brand-mark">ST</span>
+      <span class="brand-copy">
+        <strong>传感器刷题室</strong>
+        <small>SENSOR &amp; DETECTION · 全题型</small>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="主导航">
+      <button type="button" class="nav-link" data-nav="home">首页</button>
+      <button type="button" class="nav-link" data-nav="cram">背题</button>
+      <button type="button" class="nav-link" data-nav="wrong">
+        复习本<span class="nav-badge" id="navWrongBadge" hidden>0</span>
+      </button>
+      <button type="button" class="nav-link" data-nav="stats">数据</button>
+      <button type="button" class="nav-link nav-link-issues" data-nav="issues">
+        说明<span class="nav-dot" aria-hidden="true"></span>
+      </button>
+    </nav>
+  </header>
+
+  <div class="storage-notice" id="storageNotice" hidden>
+    当前浏览器禁止了本地存储，你仍可刷题，但成绩与错题不会在刷新后保留。
+  </div>
+
+  <main id="view" tabindex="-1"></main>
+
+  <footer class="site-footer">
+    <div>
+      <span class="footer-mark">ST</span>
+      <p>本地离线运行 · 进度只保存在此浏览器</p>
+    </div>
+    <div class="footer-links">
+      <a href="#view" data-nav="issues">题库说明</a>
+    </div>
+    <p class="footer-note">题目来自个人复习资料；判断/填空/名词为速记整理题，答案仅作备考参考。</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal-root" id="modalRoot" hidden>
+    <div class="modal-backdrop" data-modal-close="true"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalBody">
+      <div class="modal-kicker">ST / CHECK</div>
+      <h2 id="modalTitle">确认</h2>
+      <p id="modalBody"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modalCancel">取消</button>
+        <button type="button" class="btn btn-primary" id="modalConfirm">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="noscript">这个刷题页面需要启用 JavaScript 才能运行。</div>
+  </noscript>
+
+  <script src="data/questions.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
+
