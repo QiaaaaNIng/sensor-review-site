@@ -48,7 +48,7 @@
   const KNOWLEDGE = DATA.knowledge || [];
   const LETTERS = ["A", "B", "C", "D"];
   const CIRCLED = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"];
-  const CRAM_TYPES = ["fill", "short", "term", "calc", "homework"];
+  const CRAM_TYPES = ["short", "calc", "homework"];
   const STORAGE_KEY = "sensor_quiz_state_v1";
   const SEVERITY_LABEL = { high: "高", medium: "中", low: "低" };
 
@@ -91,9 +91,9 @@
 
   function defaultCram() {
     return {
-      type: "fill",
+      type: "short",
       hideAnswers: false,
-      positions: { fill: 0, short: 0, term: 0, calc: 0, homework: 0 },
+      positions: { short: 0, calc: 0, homework: 0 },
       orders: {},
     };
   }
@@ -102,7 +102,7 @@
     const base = defaultCram();
     if (!cram || typeof cram !== "object") return base;
     const result = {
-      type: CRAM_TYPES.includes(cram.type) ? cram.type : "fill",
+      type: CRAM_TYPES.includes(cram.type) ? cram.type : "short",
       hideAnswers: Boolean(cram.hideAnswers),
       positions: { ...base.positions },
       orders: {},
@@ -864,10 +864,10 @@
       <section class="hero hero-full">
         <div class="hero-copy">
           <div class="hero-kicker">FINAL REVIEW / ${ALL.length} ITEMS</div>
-          <h1>七种题型<br><em>一张传感器复习网</em></h1>
+          <h1>四种题型<br><em>一张传感器复习网</em></h1>
           <p class="hero-lead">
-            单选、多选、判断、填空、名词解释、简答题、计算题全部收进来。
-            前两章抓选择填空，3–9 章抓工作原理和测量电路，课后习题单独背。
+            保留题库原有的单选、多选、简答题，以及官方课后计算题。
+            我整理的判断、填空、名词解释已经删除；前两章抓选择，3–9 章抓工作原理和测量电路。
           </p>
           <div class="hero-actions">
             <button type="button" class="btn btn-primary btn-arrow" data-action="start-mixed">综合 20 题</button>
@@ -884,7 +884,7 @@
           <div class="hero-cross"></div>
           <div class="orbit"></div>
           <div class="hero-number hero-number-three">${ALL.length}<span>CARDS</span></div>
-          <div class="hero-stamp">传感器<small>选择 · 多选 · 判断 · 填空 · 名词 · 简答 · 计算</small></div>
+          <div class="hero-stamp">传感器<small>单选 · 多选 · 简答 · 计算</small></div>
         </div>
       </section>
 
@@ -917,7 +917,7 @@
           <h2 id="scopeTitle">老师划的范围</h2>
           <p>
             第1章 1.2–1.4；第2章 2.1–2.3；第3–9章每章前两节（工作原理 + 测量电路）。
-            前两章以选择、填空为主，后面选择、判断、填空、简答、计算都可能考；老师布置的课后习题已单独收进背题。
+            前两章以选择为主；老师布置的课后简答、计算已单独收进背题。判断/填空/名词解释这类我整理的内容已删除。
             站内保留了一些补充题，时间紧就先过课后习题和老师范围。
             考试时不会写也要写满：先写公式/定义，再分点写。
           </p>
@@ -937,13 +937,13 @@
             <div class="eyebrow">QUESTION TYPES</div>
             <h2 class="section-title">题型总览</h2>
           </div>
-          <p class="section-sub">七种题型都能单独刷；课后习题和计算题也可以从背题模式集中过。</p>
+          <p class="section-sub">四种题型都能单独刷；课后习题和计算题也可以从背题模式集中过。</p>
         </div>
         <div class="mixed-strip">
           <div class="mixed-strip-copy">
             <span class="eyebrow">MIXED ROUND</span>
             <strong>综合客观题 · 20 题</strong>
-            <p>从单选、多选、判断、填空中混合抽题，换着题型做，避免只记住一种问法。</p>
+            <p>从单选、多选中混合抽题，换着题型做，避免只记住一种问法。</p>
           </div>
           <button type="button" class="btn btn-accent btn-small" data-action="start-mixed">开始混合练习</button>
         </div>
@@ -951,10 +951,10 @@
           <div class="cram-strip-copy">
             <span class="eyebrow">MEMORIZE MODE</span>
             <strong>背题模式 · 答案直接摊开看</strong>
-            <p>填空、简答、名词解释、计算题和课后习题按顺序或随机翻页；可以先遮住答案，再逐题核对。</p>
+            <p>简答题、计算题和课后习题按顺序或随机翻页；可以先遮住答案，再逐题核对。</p>
           </div>
           <div class="banner-actions">
-            <button type="button" class="btn btn-primary btn-small" data-action="open-cram" data-cram-type="fill">进入背题 →</button>
+            <button type="button" class="btn btn-primary btn-small" data-action="open-cram" data-cram-type="short">进入背题 →</button>
             <button type="button" class="btn btn-ghost btn-small" data-action="open-cram" data-cram-type="homework">课后习题 ${HOMEWORK_IDS.length}</button>
           </div>
         </div>
@@ -1067,7 +1067,7 @@
   }
 
   function openCram(type) {
-    const key = CRAM_TYPES.includes(type) ? type : (state.cram?.type || "fill");
+    const key = CRAM_TYPES.includes(type) ? type : (state.cram?.type || "short");
     state.cram.type = key;
     saveState();
     navigate("cram");
@@ -1173,7 +1173,7 @@
   }
 
   function renderCram() {
-    const type = CRAM_TYPES.includes(state.cram?.type) ? state.cram.type : "fill";
+    const type = CRAM_TYPES.includes(state.cram?.type) ? state.cram.type : "short";
     state.cram.type = type;
     const meta = typeMeta(type);
     const order = cramOrderFor(type);
@@ -1195,7 +1195,7 @@
           <div>
             <div class="eyebrow">MEMORIZE MODE</div>
             <h1>背题模式</h1>
-            <p>题目和答案一起过：填空看空格、简答看踩分点、名词看定义、计算题看步骤、课后习题按老师范围过。可以先遮住答案自测，再翻页核对。</p>
+            <p>题目和答案一起过：简答看踩分点、计算题看步骤、课后习题按老师范围过。可以先遮住答案自测，再翻页核对。</p>
           </div>
           <div class="cram-head-actions">
             ${type === "calc" || type === "homework"
@@ -1467,10 +1467,8 @@
   function startMixed() {
     const take = (list, count) => shuffle(list.map((q) => q.id)).slice(0, count);
     const ids = [
-      ...take(BY_TYPE.choice, 7),
-      ...take(BY_TYPE.multi, 5),
-      ...take(BY_TYPE.judge, 4),
-      ...take(BY_TYPE.fill, 4),
+      ...take(BY_TYPE.choice, 12),
+      ...take(BY_TYPE.multi, 8),
     ];
     beginSession({
       type: "mixed",
