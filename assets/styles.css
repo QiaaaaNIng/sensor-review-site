@@ -4629,7 +4629,7 @@ button:disabled {
 
 @media (max-width: 1120px) {
   .type-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .type-card {
@@ -4851,7 +4851,7 @@ button:disabled {
 
 .cram-tabs {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 7px;
   margin-bottom: 16px;
   padding: 5px;
