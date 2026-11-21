@@ -46,6 +46,7 @@
   const GROUPS = DATA.groups || [];
   const ISSUES = DATA.issues || [];
   const KNOWLEDGE = DATA.knowledge || [];
+  const PAPER = DATA.paper || null;
   const LETTERS = ["A", "B", "C", "D"];
   const CIRCLED = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"];
   const CRAM_TYPES = ["short", "calc", "homework"];
@@ -71,6 +72,7 @@
     modalOpen: false,
     modalResolve: null,
     lastFocus: null,
+    paperAnswers: false,
   };
 
   /* -------------------------------------------------------
@@ -646,6 +648,9 @@
       case "scope":
         viewEl.innerHTML = renderScope();
         break;
+      case "paper":
+        viewEl.innerHTML = renderPaper();
+        break;
       case "wrong":
         viewEl.innerHTML = renderWrongBook();
         break;
@@ -671,7 +676,7 @@
     } else if (route === "results" && state.active) {
       document.title = `本轮 ${getResult().pct}% · 传感器刷题室`;
     } else {
-      const names = { home: "传感器刷题室", scope: "老师范围", cram: "背题模式", wrong: "复习本", stats: "学习数据", issues: "题库说明" };
+      const names = { home: "传感器刷题室", scope: "老师范围", paper: "模拟试卷", cram: "背题模式", wrong: "复习本", stats: "学习数据", issues: "题库说明" };
       document.title = `${names[route] || "传感器刷题室"} · 传感器与检测技术`;
     }
   }
@@ -723,6 +728,124 @@
         <div class="banner-actions">
           <button type="button" class="btn btn-small btn-primary" data-action="resume">${actionText}</button>
           <button type="button" class="btn btn-small btn-ghost" data-action="discard-active">放弃本轮</button>
+        </div>
+      </div>`;
+  }
+
+  function renderPaper() {
+    if (!PAPER) {
+      return '<div class="empty-state"><div class="empty-mark">!</div><h2>试卷还没有生成</h2></div>';
+    }
+    const hidden = !ui.paperAnswers;
+
+    const answerHtml = (html) => `<div class="paper-answer" ${hidden ? "hidden" : ""}>${html}</div>`;
+
+    const singleHtml = PAPER.single.map((entry, index) => {
+      const q = getQ(entry.id);
+      if (!q) return "";
+      const options = q.options.map((option) => `<div class="paper-option">${option.label}．${escapeHtml(option.text)}</div>`).join("");
+      return `
+        <article class="paper-question">
+          <div class="paper-q-head"><span class="paper-q-no">${index + 1}.</span><span class="paper-q-point">${entry.points} 分</span></div>
+          <div class="paper-stem">${formatStem(q.stem)}</div>
+          <div class="paper-options">${options}</div>
+          ${answerHtml(`<strong>答案：</strong>${q.answer}．${escapeHtml(optionText(q, q.answer))}${q.explanation ? `<span class="paper-explain">${escapeHtml(q.explanation)}</span>` : ""}`)}
+        </article>`;
+    }).join("");
+
+    const judgeHtml = PAPER.judge.map((item, index) => `
+      <article class="paper-question">
+        <div class="paper-q-head"><span class="paper-q-no">${index + 21}.</span><span class="paper-q-point">${item.points} 分</span></div>
+        <div class="paper-stem">${escapeHtml(item.stem)}（　　）</div>
+        ${answerHtml(`<strong>答案：</strong>${item.answerText}　${escapeHtml(item.explanation)}`)}
+      </article>`).join("");
+
+    const fillHtml = PAPER.fill.map((item, index) => `
+      <article class="paper-question">
+        <div class="paper-q-head"><span class="paper-q-no">${index + 41}.</span><span class="paper-q-point">${item.points} 分</span></div>
+        <div class="paper-stem paper-fill-stem">${escapeHtml(item.stem)}</div>
+        ${answerHtml(`<strong>答案：</strong>${escapeHtml(item.answer)}${item.explanation ? `<span class="paper-explain">${escapeHtml(item.explanation)}</span>` : ""}`)}
+      </article>`).join("");
+
+    const shortHtml = PAPER.short.map((entry, index) => {
+      const q = getQ(entry.id);
+      if (!q) return "";
+      return `
+        <article class="paper-question">
+          <div class="paper-q-head"><span class="paper-q-no">${index + 51}.</span><span class="paper-q-point">${entry.points} 分</span></div>
+          <div class="paper-stem">${escapeHtml(q.prompt)}</div>
+          ${answerHtml(`<div class="paper-long-answer">${escapeHtml(q.answer)}</div>${q.note ? `<p class="paper-explain">${escapeHtml(q.note)}</p>` : ""}`)}
+        </article>`;
+    }).join("");
+
+    const calcHtml = PAPER.calc.map((entry, index) => {
+      const q = getQ(entry.id);
+      if (!q) return "";
+      return `
+        <article class="paper-question">
+          <div class="paper-q-head"><span class="paper-q-no">${index + 57}.</span><span class="paper-q-point">${entry.points} 分</span></div>
+          <div class="paper-stem">${escapeHtml(q.prompt)}</div>
+          ${answerHtml(`<div class="paper-long-answer">${escapeHtml(q.answer)}</div>${q.note ? `<p class="paper-explain">${escapeHtml(q.note)}</p>` : ""}`)}
+        </article>`;
+    }).join("");
+
+    return `
+      <div class="paper-page">
+        <div class="page-head paper-head">
+          <div>
+            <div class="eyebrow">MOCK PAPER · 100 POINTS</div>
+            <h1>${escapeHtml(PAPER.title)}</h1>
+            <p>${escapeHtml(PAPER.subtitle)} · 建议 ${PAPER.minutes} 分钟 · 80 分基础 + 20 分综合</p>
+          </div>
+          <div class="paper-actions">
+            <button type="button" class="btn btn-primary btn-small" data-action="toggle-paper-answers">${ui.paperAnswers ? "隐藏答案" : "显示答案"}</button>
+            <button type="button" class="btn btn-ghost btn-small" data-action="print-paper">打印试卷</button>
+            <button type="button" class="btn btn-ghost btn-small" data-nav="home">回首页</button>
+          </div>
+        </div>
+
+        <div class="paper-summary">
+          <span><b>20</b> 单选 · 20 分</span>
+          <span><b>20</b> 判断 · 20 分</span>
+          <span><b>10</b> 填空 · 10 分</span>
+          <span><b>6</b> 简答 · 30 分</span>
+          <span><b>2</b> 计算 · 20 分</span>
+          <strong>满分 100</strong>
+        </div>
+
+        <div class="paper-intro">
+          <strong>答题说明</strong>
+          <p>单选、简答、计算使用题库/官方课后题原题；判断、填空是依据老师范围内的知识点改写，属于模拟卷自编题。做题时先不要展开答案；写完后再点“显示答案”核对。</p>
+          <p class="paper-strategy">不会写的也要写满：计算题先写公式、已知量、代入式和单位；简答题先写定义，再分点写原理、条件、结论。</p>
+        </div>
+
+        <section class="paper-section">
+          <div class="paper-section-head"><h2>一、单选题</h2><span>20 题，每题 1 分，共 20 分</span></div>
+          ${singleHtml}
+        </section>
+
+        <section class="paper-section">
+          <div class="paper-section-head"><h2>二、判断题</h2><span>20 题，每题 1 分，共 20 分；正确画 √，错误画 ×</span></div>
+          ${judgeHtml}
+        </section>
+
+        <section class="paper-section">
+          <div class="paper-section-head"><h2>三、填空题</h2><span>10 题，每题 1 分，共 10 分</span></div>
+          ${fillHtml}
+        </section>
+
+        <section class="paper-section">
+          <div class="paper-section-head"><h2>四、简答题</h2><span>6 题，每题 5 分，共 30 分</span></div>
+          ${shortHtml}
+        </section>
+
+        <section class="paper-section">
+          <div class="paper-section-head"><h2>五、计算题</h2><span>2 题，每题 10 分，共 20 分</span></div>
+          ${calcHtml}
+        </section>
+
+        <div class="paper-footer-note">
+          <strong>评分建议：</strong>单选/判断/填空按标准答案；简答按“定义 + 分点 + 结论”给分；计算按“公式 3 分 + 代入 3 分 + 结果 2 分 + 单位 2 分”给分。
         </div>
       </div>`;
   }
@@ -918,7 +1041,7 @@
           <p>
             第1章 1.2–1.4；第2章 2.1–2.3；第3–9章每章前两节（工作原理 + 测量电路）。
             前两章以选择为主；老师布置的课后简答、计算已单独收进背题。判断/填空/名词解释这类我整理的内容已删除。
-            站内保留了一些补充题，时间紧就先过课后习题和老师范围。
+            练习题库只保留题库原题和官方课后题；模拟试卷里的判断、填空是单独自编的。
             考试时不会写也要写满：先写公式/定义，再分点写。
           </p>
         </div>
@@ -927,6 +1050,15 @@
           <button type="button" class="btn btn-ghost btn-small" data-action="open-cram" data-cram-type="homework">课后习题 ${HOMEWORK_IDS.length}</button>
           <button type="button" class="btn btn-ghost btn-small" data-action="start-type" data-type="calc" data-count="6">计算题 6 道</button>
         </div>
+      </section>
+
+      <section class="paper-strip" aria-labelledby="paperStripTitle">
+        <div class="paper-strip-copy">
+          <span class="eyebrow">MOCK PAPER · 100 POINTS</span>
+          <strong id="paperStripTitle">100 分模拟试卷 · 120 分钟</strong>
+          <p>20 单选 + 20 判断 + 10 填空 + 6 简答 + 2 计算。用原题为主，答案和评分标准在试卷里。</p>
+        </div>
+        <button type="button" class="btn btn-accent btn-small" data-nav="paper">打开试卷 →</button>
       </section>
 
       ${activeBanner()}
@@ -2956,6 +3088,13 @@
           render();
           showToast("本机记录已清空");
         });
+        break;
+      case "toggle-paper-answers":
+        ui.paperAnswers = !ui.paperAnswers;
+        render({ preserveScroll: true });
+        break;
+      case "print-paper":
+        window.print();
         break;
       case "start-single":
         guardActive(() => startSingle(actionEl.dataset.id));
