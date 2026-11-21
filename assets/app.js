@@ -51,6 +51,7 @@
   const CIRCLED = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"];
   const CRAM_TYPES = ["short", "calc", "homework"];
   const STORAGE_KEY = "sensor_quiz_state_v1";
+  const PAPER_KEY = "sensor_paper_state_v1";
   const SEVERITY_LABEL = { high: "高", medium: "中", low: "低" };
 
   const viewEl = document.getElementById("view");
@@ -64,15 +65,16 @@
 
   let storageOk = true;
   let state = loadState();
+  let paperState = loadPaperState();
   const ui = {
     route: "auto",
     resultFilter: "all",
     timerId: null,
+    paperTimerId: null,
     toastTimer: null,
     modalOpen: false,
     modalResolve: null,
     lastFocus: null,
-    paperAnswers: false,
   };
 
   /* -------------------------------------------------------
@@ -619,6 +621,7 @@
   function render(options = {}) {
     const scrollY = window.scrollY;
     stopTimer();
+    stopPaperTimer();
     const route = effectiveRoute();
     updateNav(route);
     updateStorageNotice();
@@ -650,6 +653,7 @@
         break;
       case "paper":
         viewEl.innerHTML = renderPaper();
+        startPaperTimer();
         break;
       case "wrong":
         viewEl.innerHTML = renderWrongBook();
@@ -732,18 +736,156 @@
       </div>`;
   }
 
+  function emptyPaperState() {
+    return { started: false, submitted: false, answers: {}, selfScores: {}, startedAt: null, deadline: null };
+  }
+
+  function loadPaperState() {
+    try {
+      const raw = JSON.parse(window.localStorage.getItem(PAPER_KEY) || "null");
+      if (!raw || typeof raw !== "object") return emptyPaperState();
+      return {
+        ...emptyPaperState(),
+        ...raw,
+        answers: raw.answers && typeof raw.answers === "object" ? raw.answers : {},
+        selfScores: raw.selfScores && typeof raw.selfScores === "object" ? raw.selfScores : {},
+      };
+    } catch (error) {
+      return emptyPaperState();
+    }
+  }
+
+  function savePaperState() {
+    try {
+      window.localStorage.setItem(PAPER_KEY, JSON.stringify(paperState));
+    } catch (error) {
+      /* ignore */
+    }
+  }
+
+  function paperObjectiveScore() {
+    if (!PAPER) return 0;
+    let score = 0;
+    for (const entry of PAPER.single) {
+      const q = getQ(entry.id);
+      if (q && paperState.answers[q.id] === q.answer) score += entry.points;
+    }
+    PAPER.judge.forEach((item, index) => {
+      if (paperState.answers[`j${index}`] === item.answer) score += item.points;
+    });
+    PAPER.fill.forEach((item, index) => {
+      if (normalizeFillText(paperState.answers[`f${index}`] || "") === normalizeFillText(item.answer)) score += item.points;
+    });
+    return score;
+  }
+
+  function paperSelfScore() {
+    if (!PAPER) return 0;
+    let score = 0;
+    for (const entry of [...PAPER.short, ...PAPER.calc]) {
+      const value = Number(paperState.selfScores[entry.id]) || 0;
+      score += Math.max(0, Math.min(entry.points, value));
+    }
+    return score;
+  }
+
+  function paperTotalScore() {
+    return paperObjectiveScore() + paperSelfScore();
+  }
+
+  function startPaper() {
+    paperState = {
+      ...emptyPaperState(),
+      started: true,
+      startedAt: Date.now(),
+      deadline: Date.now() + (PAPER?.minutes || 120) * 60 * 1000,
+    };
+    savePaperState();
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function submitPaper(auto = false) {
+    if (!paperState.started || paperState.submitted) return;
+    paperState.submitted = true;
+    savePaperState();
+    stopPaperTimer();
+    render({ preserveScroll: true });
+    showToast(auto ? "时间到，试卷已提交" : "试卷已提交，可以核对答案和自评");
+  }
+
+  function resetPaper() {
+    showConfirm({
+      title: "重做这张试卷？",
+      message: "当前作答、计时和自评分都会被清空。",
+      confirmText: "重新开始",
+      tone: "danger",
+    }).then((ok) => {
+      if (!ok) return;
+      paperState = emptyPaperState();
+      savePaperState();
+      stopPaperTimer();
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  function stopPaperTimer() {
+    if (ui.paperTimerId) {
+      window.clearInterval(ui.paperTimerId);
+      ui.paperTimerId = null;
+    }
+  }
+
+  function updatePaperTimer() {
+    const el = document.getElementById("paperTimer");
+    if (!el || !paperState.started || paperState.submitted) {
+      stopPaperTimer();
+      return;
+    }
+    const left = Number(paperState.deadline || 0) - Date.now();
+    el.textContent = formatClock(Math.max(0, left));
+    if (left <= 0) {
+      stopPaperTimer();
+      submitPaper(true);
+    }
+  }
+
+  function startPaperTimer() {
+    stopPaperTimer();
+    if (!paperState.started || paperState.submitted) return;
+    updatePaperTimer();
+    if (paperState.started && !paperState.submitted) {
+      ui.paperTimerId = window.setInterval(updatePaperTimer, 1000);
+    }
+  }
+
   function renderPaper() {
     if (!PAPER) {
       return '<div class="empty-state"><div class="empty-mark">!</div><h2>试卷还没有生成</h2></div>';
     }
-    const hidden = !ui.paperAnswers;
+    const started = Boolean(paperState.started);
+    const submitted = Boolean(paperState.submitted);
+    const disabled = !started || submitted;
+    const left = Number(paperState.deadline || 0) - Date.now();
+    const objectiveScore = submitted ? paperObjectiveScore() : 0;
+    const selfScore = submitted ? paperSelfScore() : 0;
+    const totalScore = submitted ? objectiveScore + selfScore : 0;
 
-    const answerHtml = (html) => `<div class="paper-answer" ${hidden ? "hidden" : ""}>${html}</div>`;
+    const answerHtml = (html) => submitted ? `<div class="paper-answer">${html}</div>` : "";
 
     const singleHtml = PAPER.single.map((entry, index) => {
       const q = getQ(entry.id);
       if (!q) return "";
-      const options = q.options.map((option) => `<div class="paper-option">${option.label}．${escapeHtml(option.text)}</div>`).join("");
+      const selected = paperState.answers[q.id] || "";
+      const options = q.options.map((option) => {
+        const correct = submitted && option.label === q.answer;
+        const wrong = submitted && option.label === selected && option.label !== q.answer;
+        return `<label class="paper-choice ${correct ? "is-correct" : ""} ${wrong ? "is-wrong" : ""}">
+          <input type="radio" name="p-${q.id}" value="${option.label}" data-paper-key="${q.id}" ${selected === option.label ? "checked" : ""} ${disabled ? "disabled" : ""}>
+          <span>${option.label}．${escapeHtml(option.text)}</span>
+        </label>`;
+      }).join("");
       return `
         <article class="paper-question">
           <div class="paper-q-head"><span class="paper-q-no">${index + 1}.</span><span class="paper-q-point">${entry.points} 分</span></div>
@@ -753,41 +895,94 @@
         </article>`;
     }).join("");
 
-    const judgeHtml = PAPER.judge.map((item, index) => `
-      <article class="paper-question">
-        <div class="paper-q-head"><span class="paper-q-no">${index + 21}.</span><span class="paper-q-point">${item.points} 分</span></div>
-        <div class="paper-stem">${escapeHtml(item.stem)}（　　）</div>
-        ${answerHtml(`<strong>答案：</strong>${item.answerText}　${escapeHtml(item.explanation)}`)}
-      </article>`).join("");
+    const judgeHtml = PAPER.judge.map((item, index) => {
+      const key = `j${index}`;
+      const selected = paperState.answers[key] || "";
+      const choices = [["T", "√ 正确"], ["F", "× 错误"]].map(([value, label]) => {
+        const correct = submitted && item.answer === value;
+        const wrong = submitted && selected === value && item.answer !== value;
+        return `<label class="paper-choice ${correct ? "is-correct" : ""} ${wrong ? "is-wrong" : ""}">
+          <input type="radio" name="p-judge-${index}" value="${value}" data-paper-key="${key}" ${selected === value ? "checked" : ""} ${disabled ? "disabled" : ""}>
+          <span>${label}</span>
+        </label>`;
+      }).join("");
+      return `
+        <article class="paper-question">
+          <div class="paper-q-head"><span class="paper-q-no">${index + 21}.</span><span class="paper-q-point">${item.points} 分</span></div>
+          <div class="paper-stem">${escapeHtml(item.stem)}（　　）</div>
+          <div class="paper-options paper-judge-options">${choices}</div>
+          ${answerHtml(`<strong>答案：</strong>${item.answerText}　${escapeHtml(item.explanation)}`)}
+        </article>`;
+    }).join("");
 
-    const fillHtml = PAPER.fill.map((item, index) => `
-      <article class="paper-question">
-        <div class="paper-q-head"><span class="paper-q-no">${index + 41}.</span><span class="paper-q-point">${item.points} 分</span></div>
-        <div class="paper-stem paper-fill-stem">${escapeHtml(item.stem)}</div>
-        ${answerHtml(`<strong>答案：</strong>${escapeHtml(item.answer)}${item.explanation ? `<span class="paper-explain">${escapeHtml(item.explanation)}</span>` : ""}`)}
-      </article>`).join("");
+    const fillHtml = PAPER.fill.map((item, index) => {
+      const key = `f${index}`;
+      const value = paperState.answers[key] || "";
+      const correct = submitted && normalizeFillText(value) === normalizeFillText(item.answer);
+      return `
+        <article class="paper-question">
+          <div class="paper-q-head"><span class="paper-q-no">${index + 41}.</span><span class="paper-q-point">${item.points} 分</span></div>
+          <div class="paper-stem paper-fill-stem">${escapeHtml(item.stem)}</div>
+          <input class="paper-input ${submitted ? (correct ? "is-correct" : "is-wrong") : ""}" data-paper-key="${key}" value="${escapeAttr(value)}" placeholder="填写答案" ${disabled ? "disabled" : ""}>
+          ${answerHtml(`<strong>答案：</strong>${escapeHtml(item.answer)}${item.explanation ? `<span class="paper-explain">${escapeHtml(item.explanation)}</span>` : ""}`)}
+        </article>`;
+    }).join("");
 
     const shortHtml = PAPER.short.map((entry, index) => {
       const q = getQ(entry.id);
       if (!q) return "";
+      const value = paperState.answers[q.id] || "";
+      const self = Number(paperState.selfScores[q.id]) || 0;
       return `
         <article class="paper-question">
           <div class="paper-q-head"><span class="paper-q-no">${index + 51}.</span><span class="paper-q-point">${entry.points} 分</span></div>
           <div class="paper-stem">${escapeHtml(q.prompt)}</div>
-          ${answerHtml(`<div class="paper-long-answer">${escapeHtml(q.answer)}</div>${q.note ? `<p class="paper-explain">${escapeHtml(q.note)}</p>` : ""}`)}
+          <textarea class="paper-textarea" rows="5" data-paper-key="${q.id}" placeholder="在这里写答题要点，或写在纸上" ${disabled ? "disabled" : ""}>${escapeHtml(value)}</textarea>
+          ${submitted ? `<div class="paper-answer"><div class="paper-long-answer">${escapeHtml(q.answer)}</div>${q.note ? `<p class="paper-explain">${escapeHtml(q.note)}</p>` : ""}</div>
+          <label class="paper-self-score">自评得分：
+            <select data-self-score="${q.id}">
+              ${Array.from({ length: entry.points + 1 }, (_, n) => `<option value="${n}" ${self === n ? "selected" : ""}>${n}</option>`).join("")}
+            </select> / ${entry.points} 分
+          </label>` : ""}
         </article>`;
     }).join("");
 
     const calcHtml = PAPER.calc.map((entry, index) => {
       const q = getQ(entry.id);
       if (!q) return "";
+      const value = paperState.answers[q.id] || "";
+      const self = Number(paperState.selfScores[q.id]) || 0;
       return `
         <article class="paper-question">
           <div class="paper-q-head"><span class="paper-q-no">${index + 57}.</span><span class="paper-q-point">${entry.points} 分</span></div>
           <div class="paper-stem">${escapeHtml(q.prompt)}</div>
-          ${answerHtml(`<div class="paper-long-answer">${escapeHtml(q.answer)}</div>${q.note ? `<p class="paper-explain">${escapeHtml(q.note)}</p>` : ""}`)}
+          <textarea class="paper-textarea" rows="7" data-paper-key="${q.id}" placeholder="写公式、代入过程和结果；也可以写在纸上" ${disabled ? "disabled" : ""}>${escapeHtml(value)}</textarea>
+          ${submitted ? `<div class="paper-answer"><div class="paper-long-answer">${escapeHtml(q.answer)}</div>${q.note ? `<p class="paper-explain">${escapeHtml(q.note)}</p>` : ""}</div>
+          <label class="paper-self-score">自评得分：
+            <select data-self-score="${q.id}">
+              ${Array.from({ length: entry.points + 1 }, (_, n) => `<option value="${n}" ${self === n ? "selected" : ""}>${n}</option>`).join("")}
+            </select> / ${entry.points} 分
+          </label>` : ""}
         </article>`;
     }).join("");
+
+    const actionButtons = !started
+      ? '<button type="button" class="btn btn-primary btn-small" data-action="start-paper">开始考试</button>'
+      : submitted
+        ? '<button type="button" class="btn btn-ghost btn-small" data-action="reset-paper">重做试卷</button>'
+        : '<button type="button" class="btn btn-primary btn-small" data-action="submit-paper">提交试卷</button>';
+
+    const timer = started && !submitted
+      ? `<span class="paper-timer">剩余 <b id="paperTimer">${formatClock(Math.max(0, left))}</b></span>`
+      : "";
+
+    const scorePanel = submitted
+      ? `<div class="paper-score-panel" id="paperScorePanel">
+           <div><span>客观题</span><strong>${objectiveScore} / 50</strong></div>
+           <div><span>主观题自评</span><strong id="paperSelfScore">${selfScore} / 50</strong></div>
+           <div class="paper-total"><span>总分</span><strong id="paperTotalScore">${totalScore} / 100</strong></div>
+         </div>`
+      : "";
 
     return `
       <div class="paper-page">
@@ -795,11 +990,12 @@
           <div>
             <div class="eyebrow">MOCK PAPER · 100 POINTS</div>
             <h1>${escapeHtml(PAPER.title)}</h1>
-            <p>${escapeHtml(PAPER.subtitle)} · 建议 ${PAPER.minutes} 分钟 · 80 分基础 + 20 分综合</p>
+            <p>${escapeHtml(PAPER.subtitle)} · ${PAPER.minutes} 分钟 · 80 分基础 + 20 分综合</p>
           </div>
           <div class="paper-actions">
-            <button type="button" class="btn btn-primary btn-small" data-action="toggle-paper-answers">${ui.paperAnswers ? "隐藏答案" : "显示答案"}</button>
-            <button type="button" class="btn btn-ghost btn-small" data-action="print-paper">打印试卷</button>
+            ${actionButtons}
+            ${timer}
+            <button type="button" class="btn btn-ghost btn-small" data-action="print-paper">打印</button>
             <button type="button" class="btn btn-ghost btn-small" data-nav="home">回首页</button>
           </div>
         </div>
@@ -814,10 +1010,12 @@
         </div>
 
         <div class="paper-intro">
-          <strong>答题说明</strong>
-          <p>${escapeHtml(PAPER.note || "单选、简答、计算使用题库/官方课后题原题；判断、填空的依据是老师范围内的知识点。")} 做题时先不要展开答案；写完后再点“显示答案”核对。</p>
+          <strong>${submitted ? "已提交" : started ? "考试中" : "开始前"}</strong>
+          <p>${escapeHtml(PAPER.note || "单选、简答、计算使用题库/官方课后题原题；判断、填空的依据是老师范围内的知识点。")} ${submitted ? "下面已展开标准答案，简答/计算请按点自评。" : "答案在提交后才会显示。"}</p>
           <p class="paper-strategy">不会写的也要写满：计算题先写公式、已知量、代入式和单位；简答题先写定义，再分点写原理、条件、结论。</p>
         </div>
+
+        ${scorePanel}
 
         <section class="paper-section">
           <div class="paper-section-head"><h2>一、单选题</h2><span>20 题，每题 1 分，共 20 分</span></div>
@@ -3089,9 +3287,14 @@
           showToast("本机记录已清空");
         });
         break;
-      case "toggle-paper-answers":
-        ui.paperAnswers = !ui.paperAnswers;
-        render({ preserveScroll: true });
+      case "start-paper":
+        startPaper();
+        break;
+      case "submit-paper":
+        submitPaper(false);
+        break;
+      case "reset-paper":
+        resetPaper();
         break;
       case "print-paper":
         window.print();
@@ -3112,6 +3315,26 @@
   });
 
   document.addEventListener("change", (event) => {
+    const paperInput = event.target.closest("[data-paper-key]");
+    if (paperInput) {
+      if (!paperState.started || paperState.submitted) return;
+      if (paperInput.type === "radio" && !paperInput.checked) return;
+      paperState.answers[paperInput.dataset.paperKey] = paperInput.value;
+      savePaperState();
+      return;
+    }
+
+    const selfScore = event.target.closest("[data-self-score]");
+    if (selfScore) {
+      paperState.selfScores[selfScore.dataset.selfScore] = Number(selfScore.value) || 0;
+      savePaperState();
+      const selfEl = document.getElementById("paperSelfScore");
+      const totalEl = document.getElementById("paperTotalScore");
+      if (selfEl) selfEl.textContent = `${paperSelfScore()} / 50`;
+      if (totalEl) totalEl.textContent = `${paperTotalScore()} / 100`;
+      return;
+    }
+
     const cramInput = event.target.closest("[data-cram-setting]");
     if (cramInput) {
       if (cramInput.dataset.cramSetting === "hideAnswers") {
@@ -3128,6 +3351,14 @@
     if (key !== "shuffleOptions" && key !== "randomOrder") return;
     state.settings[key] = input.checked;
     saveState();
+  });
+
+  document.addEventListener("input", (event) => {
+    const paperInput = event.target.closest("[data-paper-key]");
+    if (!paperInput || paperInput.type === "radio") return;
+    if (!paperState.started || paperState.submitted) return;
+    paperState.answers[paperInput.dataset.paperKey] = paperInput.value;
+    savePaperState();
   });
 
   document.addEventListener("keydown", (event) => {
