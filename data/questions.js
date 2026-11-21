@@ -21,7 +21,9 @@ window.HV_DATA = {
       "3.7",
       "4.7",
       "5.8"
-    ]
+    ],
+    "paperTotal": 100,
+    "paperMinutes": 120
   },
   "types": [
     {
@@ -6485,5 +6487,334 @@ window.HV_DATA = {
         "9.27"
       ]
     }
-  ]
+  ],
+  "paper": {
+    "title": "传感器与检测技术 · 100 分模拟试卷",
+    "subtitle": "按老师范围整理：80 分基础 + 20 分综合",
+    "minutes": 120,
+    "total": 100,
+    "single": [
+      {
+        "id": "choice-1",
+        "points": 1
+      },
+      {
+        "id": "choice-2",
+        "points": 1
+      },
+      {
+        "id": "choice-7",
+        "points": 1
+      },
+      {
+        "id": "choice-8",
+        "points": 1
+      },
+      {
+        "id": "choice-9",
+        "points": 1
+      },
+      {
+        "id": "choice-10",
+        "points": 1
+      },
+      {
+        "id": "choice-11",
+        "points": 1
+      },
+      {
+        "id": "choice-13",
+        "points": 1
+      },
+      {
+        "id": "choice-15",
+        "points": 1
+      },
+      {
+        "id": "choice-18",
+        "points": 1
+      },
+      {
+        "id": "choice-22",
+        "points": 1
+      },
+      {
+        "id": "choice-24",
+        "points": 1
+      },
+      {
+        "id": "choice-27",
+        "points": 1
+      },
+      {
+        "id": "choice-30",
+        "points": 1
+      },
+      {
+        "id": "choice-32",
+        "points": 1
+      },
+      {
+        "id": "choice-37",
+        "points": 1
+      },
+      {
+        "id": "choice-41",
+        "points": 1
+      },
+      {
+        "id": "choice-43",
+        "points": 1
+      },
+      {
+        "id": "choice-48",
+        "points": 1
+      },
+      {
+        "id": "choice-49",
+        "points": 1
+      }
+    ],
+    "judge": [
+      {
+        "stem": "传感器通常由敏感元件和转换元件组成。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "敏感元件直接感受被测量，转换元件把响应转换为电信号。",
+        "points": 1
+      },
+      {
+        "stem": "传感器只能按工作原理分类。",
+        "answer": "F",
+        "answerText": "×",
+        "explanation": "还可按输入量、输出量、基本效应、构成、能量关系等分类。",
+        "points": 1
+      },
+      {
+        "stem": "静态特性描述输入—输出关系，不含时间变量。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "静态特性是稳态信号作用下的输入—输出关系。",
+        "points": 1
+      },
+      {
+        "stem": "传感器的动态特性只能通过频域方法分析。",
+        "answer": "F",
+        "answerText": "×",
+        "explanation": "可从时域（瞬态响应法）和频域（频率响应法）分析。",
+        "points": 1
+      },
+      {
+        "stem": "全桥差动电路的电压灵敏度是单臂工作时的 4 倍。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "差动电桥提高灵敏度，全桥差动为单臂的 4 倍。",
+        "points": 1
+      },
+      {
+        "stem": "应变片温度误差只由电阻温度系数引起。",
+        "answer": "F",
+        "answerText": "×",
+        "explanation": "还包括试件与电阻丝线膨胀系数不同产生的附加应变。",
+        "points": 1
+      },
+      {
+        "stem": "差动测量电路可以减小非线性误差。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "差动结构使非线性项相互抵消一部分。",
+        "points": 1
+      },
+      {
+        "stem": "差动变压器最典型的用途是测量位移。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "差动变压器把位移转换为两次级绕组感应电压的差。",
+        "points": 1
+      },
+      {
+        "stem": "零点残余电压只由环境温度升高引起。",
+        "answer": "F",
+        "answerText": "×",
+        "explanation": "主要由两次级绕组/磁路不对称和磁化曲线非线性等引起。",
+        "points": 1
+      },
+      {
+        "stem": "相敏检波电路可以判断位移的方向。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "相敏检波输出极性反映衔铁位移方向。",
+        "points": 1
+      },
+      {
+        "stem": "变面积型电容传感器输入输出近似线性。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "电容量与面积改变量近似成正比。",
+        "points": 1
+      },
+      {
+        "stem": "差动电容结构可以提高灵敏度并减小非线性。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "两电容一增一减，差动输出改善灵敏度和线性。",
+        "points": 1
+      },
+      {
+        "stem": "石英晶体沿光轴方向受力会产生压电效应。",
+        "answer": "F",
+        "answerText": "×",
+        "explanation": "沿光轴方向受力不产生压电效应。",
+        "points": 1
+      },
+      {
+        "stem": "压电式传感器适合测量静态力。",
+        "answer": "F",
+        "answerText": "×",
+        "explanation": "压电式传感器适合动态力、振动和加速度测量。",
+        "points": 1
+      },
+      {
+        "stem": "电荷放大器输出与电缆电容基本无关。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "电荷放大器输出主要取决于反馈电容。",
+        "points": 1
+      },
+      {
+        "stem": "霍尔电势与激励电流和磁感应强度有关。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "U_H=K_HIB，随电流和磁感应强度增大而增大。",
+        "points": 1
+      },
+      {
+        "stem": "霍尔元件的不等位电动势属于零位误差。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "不等位电动势是霍尔元件最主要的零位误差。",
+        "points": 1
+      },
+      {
+        "stem": "热电偶测温必须外加电源。",
+        "answer": "F",
+        "answerText": "×",
+        "explanation": "热电偶属于有源传感器，测温时不需要外加电源。",
+        "points": 1
+      },
+      {
+        "stem": "高精度热电阻测量宜采用四线制。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "四线制可消除连接导线电阻的影响。",
+        "points": 1
+      },
+      {
+        "stem": "光电式传感器基于光电效应工作。",
+        "answer": "T",
+        "answerText": "√",
+        "explanation": "光照引起物体电学特性改变，从而把光信号转换为电信号。",
+        "points": 1
+      }
+    ],
+    "fill": [
+      {
+        "stem": "传感器通常由敏感元件和____组成。",
+        "answer": "转换元件",
+        "explanation": "敏感元件直接感受被测量，转换元件把响应转换为电信号。",
+        "points": 1
+      },
+      {
+        "stem": "静态特性指标包括线性度、灵敏度、分辨率、迟滞、重复性和____。",
+        "answer": "漂移",
+        "explanation": "静态特性描述稳态输入—输出关系。",
+        "points": 1
+      },
+      {
+        "stem": "动态特性可从时域和频域分析，分别采用瞬态响应法和____。",
+        "answer": "频率响应法",
+        "explanation": "时域用瞬态响应法，频域用频率响应法。",
+        "points": 1
+      },
+      {
+        "stem": "金属丝电阻随机械变形大小变化的现象称为____。",
+        "answer": "电阻应变效应",
+        "explanation": "这是电阻应变片的工作原理。",
+        "points": 1
+      },
+      {
+        "stem": "全桥差动电路的电压灵敏度是单臂工作时的____倍。",
+        "answer": "4",
+        "explanation": "半桥差动约 2 倍，全桥差动约 4 倍。",
+        "points": 1
+      },
+      {
+        "stem": "差动变压器最典型的用途是测量____。",
+        "answer": "位移",
+        "explanation": "差动变压器输出反映衔铁位移大小和方向。",
+        "points": 1
+      },
+      {
+        "stem": "变面积型电容传感器的输入输出关系近似为____。",
+        "answer": "线性",
+        "explanation": "电容量与面积改变量近似成正比。",
+        "points": 1
+      },
+      {
+        "stem": "压电式传感器是典型的____传感器。",
+        "answer": "有源",
+        "explanation": "它把机械能转换为电能，不需要外加电源。",
+        "points": 1
+      },
+      {
+        "stem": "霍尔电势 U_H=____（用 K_H、I、B 表示）。",
+        "answer": "K_HIB",
+        "explanation": "霍尔电势与霍尔系数、电流和磁感应强度有关。",
+        "points": 1
+      },
+      {
+        "stem": "热电偶冷端补偿方法包括补偿导线法、冷端恒温法、冷端温度校正法和____。",
+        "answer": "电桥补偿法",
+        "explanation": "电桥补偿法用不平衡电桥产生补偿电动势。",
+        "points": 1
+      }
+    ],
+    "short": [
+      {
+        "id": "short-27",
+        "points": 5
+      },
+      {
+        "id": "short-28",
+        "points": 5
+      },
+      {
+        "id": "short-29",
+        "points": 5
+      },
+      {
+        "id": "short-31",
+        "points": 5
+      },
+      {
+        "id": "short-32",
+        "points": 5
+      },
+      {
+        "id": "short-37",
+        "points": 5
+      }
+    ],
+    "calc": [
+      {
+        "id": "calc-1",
+        "points": 10
+      },
+      {
+        "id": "calc-8",
+        "points": 10
+      }
+    ],
+    "note": "单选、简答、计算使用题库/官方课后题原题；判断、填空按老师范围内的知识点改写，属于模拟卷自编题。"
+  }
 };
